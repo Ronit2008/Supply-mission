@@ -1,5 +1,5 @@
 var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
-var packageBody,ground
+var packageBody,ground,Box1;
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -29,9 +29,9 @@ function setup() {
 
 
 	engine = Engine.create();
-	world = engine.world;
+	world = engine.world; 
 
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.5, isStatic:false});
+	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.5, isStatic:true});
 	World.add(world, packageBody);
 	console.log(ground);
     
@@ -39,9 +39,9 @@ function setup() {
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
  	World.add(world, ground);
 
-    
-
-
+	 Box1 = new box (300,600,20,100);
+     Box2 = new box (400,650,200,20)
+     Box3 = new box (500,600,20,100)
 	Engine.run(engine);
   
 }
@@ -53,13 +53,14 @@ function draw() {
   packageSprite.x= packageBody.position.x 
   packageSprite.y= packageBody.position.y 
   drawSprites();
- 
+ Box1.display();
+ Box2.display();
+ Box3.display();
 }
 
 function keyPressed() {
  if (keyCode === DOWN_ARROW) {
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:1, isStatic:false});
-	World.add(world, packageBody);
+	Matter.Body.setStatic(packageBody,false);
 	
     
   }
